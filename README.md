@@ -1,4 +1,4 @@
-# RCRV Flowthrough Valve
+# RCRV Flowthrough Filtration System
 
 This repository contains Python 3 modules and scripts for driving a three-way valve using a Raspberry Pi Waveshare Relay Hat.
 
