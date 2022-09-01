@@ -51,9 +51,9 @@ class WaveshareRelayHat():
 
     def __enter__(self) -> object:
         """Context Manager. Allows for wrapping of the Relay() class into a with statement."""
-        self.initialize(Channel.One)
-        self.initialize(Channel.Two)
-        self.initialize(Channel.Three)
+        self.initialize(WaveshareDefaultChannels.One)
+        self.initialize(WaveshareDefaultChannels.Two)
+        self.initialize(WaveshareDefaultChannels.Three)
         return self
 
     def __exit__(self,t,v,tb) -> None:

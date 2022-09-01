@@ -1,11 +1,6 @@
-from flowthrough_valve.relay import WaveshareRelayHat, WaveshareDefaultChannels
+from ffs.relay import WaveshareRelayHat, WaveshareDefaultChannels
+import pytest
 import time
-
-channels = [WaveshareDefaultChannels.One, WaveshareDefaultChannels.Two, WaveshareDefaultChannels.Three]
-
-def main():
-    no_context()   # Test Relay class functionality with no context.
-    context()  # Test RelayHat class functionality with context.
 
 
 def no_context():
@@ -13,7 +8,7 @@ def no_context():
     for channel in channels:
         relay.initialize(channel)
         relay.enable(channel)
-        time.sleep(3)
+        time.sleep(1)
         if relay.state(channel) is True:
             relay.disable(channel)
         else:
@@ -25,11 +20,16 @@ def context():
     with WaveshareRelayHat() as relay:
         for channel in channels:
             relay.enable(channel)
-            time.sleep(3)
+            time.sleep(1)
             if relay.state(channel) is True:
                 relay.disable(channel)
             else:
                 raise RuntimeError("A relay channel did not enable when it was told to enable!")
+
+
+channels = [WaveshareDefaultChannels.One, WaveshareDefaultChannels.Two, WaveshareDefaultChannels.Three]
+no_context()   # Test Relay class functionality with no context.
+context()  # Test RelayHat class functionality with context.
 
 
 def test_answer():  # Test for pytest.
@@ -39,5 +39,3 @@ def test_answer():  # Test for pytest.
         assert relay.state(channel) is False
     relay.deinitialize()
 
-if __name__ == "__main__":
-    main()
