@@ -21,11 +21,11 @@ class UDP():
         self.log_stream = io.StringIO()
         console = logging.StreamHandler()
         console.setLevel(logging.DEBUG)
+        console.setFormatter(fmt)
         stream = logging.StreamHandler(self.log_stream)
         stream.setFormatter(fmt)
-        console.setFormatter(fmt)
-        self.log.addHandler(stream)
         self.log.addHandler(console)
+        self.log.addHandler(stream)
 
 
     def send_info(self,message):
